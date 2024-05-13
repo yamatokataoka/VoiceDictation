@@ -85,7 +85,7 @@ class ViewModel: ObservableObject {
     guard let recognitionRequest = recognitionRequest else {
       fatalError("Unable to create a SFSpeechAudioBufferRecognitionRequest object")
     }
-    recognitionRequest.shouldReportPartialResults = true // 発話ごとに中間結果を返すかどうか
+    recognitionRequest.shouldReportPartialResults = true
     recognitionRequest.requiresOnDeviceRecognition = false
     
     let inputNode = audioEngine.inputNode
@@ -112,11 +112,10 @@ class ViewModel: ObservableObject {
     
     let recordingFormat = inputNode.outputFormat(forBus: 0)
     inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, _: AVAudioTime) in
-      recognitionRequest.append(buffer) // 認識リクエストに取得した音声を加える
+      recognitionRequest.append(buffer)
     }
     
     audioEngine.prepare()
-    
     do {
       try audioEngine.start()
     } catch {
@@ -131,10 +130,10 @@ class ViewModel: ObservableObject {
     audioEngine.stop()
     audioEngine.inputNode.removeTap(onBus: 0)
     
-    recognitionTask?.cancel()
+    recognitionTask?.finish()
     
-    recognitionRequest = nil
     recognitionTask = nil
+    recognitionRequest = nil
     
     state = .notRecording
   }
