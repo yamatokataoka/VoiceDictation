@@ -14,7 +14,7 @@ struct ContentView: View {
     VStack {
       TextEditor(text: $viewModel.transcribedText)
         .font(.title)
-        .disabled(true)
+        .cornerRadius(10.0)
         .padding()
       
       Button(action: {
