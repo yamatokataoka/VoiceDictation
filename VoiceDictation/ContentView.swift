@@ -38,7 +38,6 @@ struct ContentView: View {
       })
       .buttonStyle(PlainButtonStyle())
       .clipShape(Circle())
-      .padding()
     }
     .padding()
     .onAppear {
