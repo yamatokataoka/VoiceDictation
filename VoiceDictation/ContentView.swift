@@ -13,6 +13,7 @@ struct ContentView: View {
   var body: some View {
     VStack {
       TextEditor(text: $viewModel.transcribedText)
+        .disabled(viewModel.state.isRecording ? true : false)
         .font(.title)
         .cornerRadius(10.0)
         .padding()
