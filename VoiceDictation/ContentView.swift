@@ -32,6 +32,7 @@ struct ContentView: View {
         Image(systemName: viewModel.state.isRecording ? "stop.circle" : "record.circle")
           .resizable()
           .scaledToFit()
+          .foregroundStyle(.red, .primary)
           .frame(width: 50, height: 50)
       })
     }
