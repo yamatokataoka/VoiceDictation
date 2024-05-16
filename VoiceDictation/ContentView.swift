@@ -36,6 +36,9 @@ struct ContentView: View {
           .foregroundStyle(.red, .primary)
           .frame(width: 50, height: 50)
       })
+      .buttonStyle(PlainButtonStyle())
+      .clipShape(Circle())
+      .padding()
     }
     .padding()
     .onAppear {
