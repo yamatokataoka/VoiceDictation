@@ -119,7 +119,7 @@ class ViewModel: ObservableObject {
     do {
       try audioEngine.start()
     } catch {
-      print("failed to call audioEngine?.start()")
+      print("failed to call audioEngine.start()")
       print(error)
     }
     state = .recording
