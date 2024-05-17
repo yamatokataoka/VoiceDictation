@@ -8,11 +8,6 @@
 import Speech
 import AVFoundation
 
-var speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
-var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-var recognitionTask: SFSpeechRecognitionTask?
-var audioEngine: AVAudioEngine = AVAudioEngine()
-
 enum AppState: Equatable {
   case notRecording
   case recording
@@ -41,6 +36,11 @@ class ViewModel: ObservableObject {
   @Published var state: AppState = .notRecording
   @Published var transcribedText: String = "Tap the button below to begin"
   
+  private var speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+  private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+  private var recognitionTask: SFSpeechRecognitionTask?
+  private var audioEngine: AVAudioEngine = AVAudioEngine()
+
   func requestSpeechRecognizerAuthorization() {
     if (SFSpeechRecognizer.authorizationStatus() == .authorized) { return }
     
